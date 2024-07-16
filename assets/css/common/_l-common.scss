@@ -1,0 +1,35 @@
+/**
+* @file _common.scss
+**/
+
+.is-pc {
+    display: block;
+    @include media-sp {
+        display: none!important;
+    }
+}
+
+.is-sp {
+    display: none!important;
+    @include media-sp {
+        display: block!important;
+    }
+}
+
+.__container {
+    width: 950px;
+    padding-right: 25px;
+    padding-left: 25px;
+}
+
+.__question {
+    display: none;
+}
+
+.__none {
+    display: none!important;
+}
+
+.__contactus {
+    display: none!important;
+}

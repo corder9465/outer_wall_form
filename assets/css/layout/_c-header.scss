@@ -1,0 +1,22 @@
+.c-header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 15px;
+    width: 100%;
+    background: rgba(255, 255, 255, 0.3);
+    backdrop-filter: blur(10px);
+    position: fixed;
+    z-index: 9999;
+    .c-header__inner {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        max-width: 900px;
+        .__link-wrap {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+    }
+}
