@@ -22,19 +22,89 @@ $(document).ready(function() {
 // });
 
 
+// $(document).ready(function() {
+//     $(window).on('resize load', function() {
+//         $("html, body").scrollTop($(document).height());
+//     });
+
+//     // If new content is dynamically added
+//     setInterval(function() {
+//         $("html, body").scrollTop($(document).height());
+//     }, 2500); // Adjust time interval as needed
+// });
+
+
 $(document).ready(function() {
-    $(window).on('resize load', function() {
-        $("html, body").scrollTop($(document).height());
+    let allowAutoScroll = true; // Flag to enable auto-scroll
+    let timeout, scrollInterval;
+
+    // Function to handle auto-scroll
+    function autoScroll() {
+        if (allowAutoScroll) {
+            $("html, body").scrollTop($(document).height());
+        }
+    }
+
+    // Function to start continuous auto-scroll
+    function startAutoScroll() {
+        allowAutoScroll = true;
+        scrollInterval = setInterval(autoScroll, 1000); // Continuously scroll to the bottom
+    }
+
+    // Function to stop auto-scroll
+    function stopAutoScroll() {
+        allowAutoScroll = false;
+        clearInterval(scrollInterval); // Stop the interval that triggers auto-scroll
+    }
+
+    // Initially, start scrolling on page load
+    startAutoScroll();
+
+    // Stop auto-scrolling after 10 seconds of page load
+    setTimeout(stopAutoScroll, 16000);
+
+    // Event handler for any click on the document
+    $(document).on('click', function() {
+        clearTimeout(timeout); // Clear any previous timeout to reset the timer
+        clearInterval(scrollInterval); // Ensure to clear previous interval as well
+
+        startAutoScroll(); // Restart auto-scrolling
+
+        // Set a new timeout to disable auto-scroll after 6 seconds from the last click
+        timeout = setTimeout(stopAutoScroll, 6000);
     });
 
-    // If new content is dynamically added
-    setInterval(function() {
-        $("html, body").scrollTop($(document).height());
-    }, 2500); // Adjust time interval as needed
+    // Optional: Scroll to the bottom on window resize
+    $(window).on('resize', autoScroll);
 });
 
 
+
+
 $(document).ready(function() {
+    $('#question_2 .__makeanswer .__makeanswer-item').on('click', function() {
+
+        var index = $('#question_2 .__makeanswer .__makeanswer-item').index(this);
+        console.log(index);
+        if (index === 0) {
+            var ttl = $(this).find('.__item-ttl .__ttl').text();
+            $('#answer_3 .__answer-main .a__main-ctn span').text(ttl);
+            $('#answer_3').removeClass('__none');
+            $('#question_2 .__makeanswer').css('display', 'none');
+            setInterval(function() {
+                $('#question_4').css('display', 'block');
+            }, 1000);
+        } else {
+            var ttl = $(this).find('.__item-ttl .__ttl').text();
+            $('#answer_3 .__answer-main .a__main-ctn span').text(ttl);
+            $('#answer_3').removeClass('__none');
+            $('#question_2 .__makeanswer').css('display', 'none');
+            setInterval(function() {
+                $('#question_3').css('display', 'block');
+            }, 1000);
+        }
+
+    });
     $('#question_3 .__makeanswer .__makeanswer-item').on('click', function() {
         var ttl = $(this).find('.__item-ttl .__ttl').text();
         $('#answer_4 .__answer-main .a__main-ctn span').text(ttl);
@@ -46,6 +116,42 @@ $(document).ready(function() {
     });
 
     $('#question_4 .__makeanswer .__makeanswer-item').on('click', function() {
+        var index = $('#question_4 .__makeanswer .__makeanswer-item').index(this);
+        if (index == 0) {
+            $('#question_5 .__question-area .__question-main .q__main-ctn').text("外壁は、どのような工事をご希望ですか？");
+            $('#question_5 .__makeanswer .__makeanswer-item').eq(1).css('display', 'none');
+            $('#question_10 .__question-area[data-index="1"]').hide();
+            $('#question_11 .__question-area[data-index="1"]').hide();
+            $('#question_12 .__question-area[data-index="1"]').hide();
+            $('#question_13 .__question-area[data-index="1"]').hide();
+            $('#question_14 .__question-area[data-index="1"]').hide();
+            $('#question_15 .__question-area[data-index="1"]').hide();
+            $('#question_16 .__question-area[data-index="1"]').hide();
+
+            $('#question_10 .__makeanswer[data-index="1"]').hide();
+            $('#question_11 .__makeanswer[data-index="1"]').hide();
+            $('#question_12 .__makeanswer[data-index="1"]').hide();
+            $('#question_13 .__makeanswer[data-index="1"]').hide();
+            $('#question_14 .__makeanswer[data-index="1"]').hide();
+            $('#question_15 .__makeanswer[data-index="1"]').hide();
+            $('#question_16 .__makeanswer[data-index="1"]').hide();
+        } else if (index != 0) {
+            $('#question_10 .__makeanswer[data-index="0"]').hide();
+            $('#question_11 .__makeanswer[data-index="0"]').hide();
+            $('#question_12 .__makeanswer[data-index="0"]').hide();
+            $('#question_13 .__makeanswer[data-index="0"]').hide();
+            $('#question_14 .__makeanswer[data-index="0"]').hide();
+            $('#question_15 .__makeanswer[data-index="0"]').hide();
+            $('#question_16 .__makeanswer[data-index="0"]').hide();
+
+            $('#question_10 .__question-area[data-index="0"]').hide();
+            $('#question_11 .__question-area[data-index="0"]').hide();
+            $('#question_12 .__question-area[data-index="0"]').hide();
+            $('#question_13 .__question-area[data-index="0"]').hide();
+            $('#question_14 .__question-area[data-index="0"]').hide();
+            $('#question_15 .__question-area[data-index="0"]').hide();
+            $('#question_16 .__question-area[data-index="0"]').hide();
+        }
         var ttl = $(this).find('.__item-ttl .__ttl').text();
         $('#answer_5 .__answer-main .a__main-ctn span').text(ttl);
         $('#answer_5').removeClass('__none');
@@ -218,9 +324,47 @@ $(document).ready(function() {
                 $(this).fadeIn();
             }, index * delay);
         });
+
+        setInterval(function() {
+            $('.__contactus').removeClass('__none');
+        }, 6000);
+
     });
 });
 
+$(document).ready(function() {
+    $('.__btn').on('click', function() {
+        let delay = 2000;
+        $('.__thank').each(function(index) {
+            setTimeout(() => {
+                $(this).fadeIn();
+            }, index * delay);
+        });
+    });
+});
+
+// $(document).reday(function() {
+//     $('.__edit').on('click', function() {
+
+//     });
+// });
+
+
+$(document).ready(function() {
+    // Event delegation to handle clicks on elements with class '__edit'
+    $('.__edit').on('click', function() {
+        var editId = $(this).attr('id');
+        var num = editId.replace(/\D/g, '');
+        var targetSelector = '#question_' + num + ' .__makeanswer';
+        console.log(targetSelector);
+        // Apply CSS or show the target element
+        $(targetSelector).css('display', 'grid'); // Alternatively, you can use .show() if default display is fine
+    });
+
+    $('#edit_0').on('click', function() {
+        $('.__map').css('display', 'block');
+    });
+});
 
 
 // $(document).ready(function() {

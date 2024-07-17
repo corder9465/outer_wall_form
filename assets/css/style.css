@@ -172,10 +172,6 @@ figure {
   display: none !important;
 }
 
-.__contactus {
-  display: none !important;
-}
-
 .c-header {
   display: flex;
   align-items: center;
@@ -205,6 +201,9 @@ figure {
   padding: 15px;
   color: white;
   background-color: #00C1FB;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
 }
 
 #top {
@@ -229,6 +228,7 @@ figure {
   align-items: center;
   justify-content: center;
   padding-top: 80px;
+  padding-bottom: 70px;
 }
 #top .p-chatting-area .__map {
   display: none;
@@ -298,7 +298,8 @@ figure {
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
-  gap: 25px;
+  gap: 15px;
+  row-gap: 15px;
   width: -moz-max-content;
   width: max-content;
 }
@@ -379,7 +380,7 @@ figure {
   flex-direction: column;
   align-items: flex-end;
   gap: 90px;
-  margin-bottom: 60px;
+  margin-bottom: 165px;
 }
 #top .p-chatting-area .__contactus .__form {
   width: 100%;
@@ -420,6 +421,10 @@ figure {
   box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.2509803922);
   cursor: pointer;
   transition: transform 0.3s;
+  margin-top: 90px;
+  width: -moz-max-content;
+  width: max-content;
+  float: right;
 }
 #top .p-chatting-area .__contactus .__btn:hover {
   transform: scale(1.2);
