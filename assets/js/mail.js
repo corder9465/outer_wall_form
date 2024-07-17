@@ -1,68 +1,29 @@
-$(".__submit-btn").click(function(){
+$(document).ready(function() {
+    $('.__btn').on('click', function() {
+        var itemsText = [];
 
-    $("input").each(function(){
-        $(this).removeClass("input__error")
-    })
-    $("textarea").each(function(){
-        $(this).removeClass("input__error")
-    })
-    $(".__error").each(function(){
-        $(this).removeClass("is-active")
-    })
-    var success = true;
-    var testEmail = /^[A-Z0-9._%+-]+@([A-Z0-9-]+\.)+[A-Z]{2,4}$/i;
-    var e = document.getElementById("select_pref");
-   
-    var contact__name = $("#contact_name").val()
-    var contact__phone = $("#contact_phone").val()
-    var contact__email = $("#contact_email").val()    
-    var contact__birth = $("#contact_birth").val()
-    var select__pref = e.options[e.selectedIndex].text
-    var select__city = $("#select_city").val()
-    var contact__contents = $("#contact_contents").val()
-    
+        // Loop through each answer ID
+        for (let i = 1; i <= 20; i++) {
+            var itemText = $('#answer_' + i + ' .__answer-main .a__main-ctn span').text(); // Extract text from the element with class 'item'
+            if (itemText) { // Check if the text is not empty
+                itemsText.push(itemText); // Add the text to the array
+            }
+        }
 
-    if(contact__name == "" || contact__name.length < 2){
-        $("#contact_name").addClass("input__error")
-        $(".contact__name__error").addClass("is-active")
-        success = false
-    }    
-    if(contact__phone == ""){
-        $("#contact_phone").addClass("input__error")
-        $(".contact__phone__error").addClass("is-active")
-        success = false
-    }
-    // if (!testEmail.test(contact__email)){
-    //     $("#contact_email").addClass("input__error")
-    //     $(".contact__email__error").addClass("is-active")
-    //     success = false
-    // }
-    if(contact__birth == ""){
-        $("#contact_birth").addClass("input__error")
-        $(".contact__birth__error").addClass("is-active")
-        success = false
-    }
-    if(contact__contents == ""){
-        $("#contact_contents").addClass("input__error")
-        $(".contact__contents__error").addClass("is-active")
-        success = false
-    }
+        // console.log('data:', itemsText);
 
-    if(success){
-        $.post("contact_form.php", {          
-            contact__name: contact__name,
-            contact__phone: contact__phone,
-            contact__email: contact__email,           
-            contact__birth: contact__birth,
-            select__pref: select__pref,
-            select__city: select__city,
-            contact__contents: contact__contents
-            }, function(data) {
-            if (data == "success") {
-                alert("お問い合わせを送信しました。")  
-            }else{
-                alert("サーバーエラーでメッセージの送信に失敗しました。後でもう一度お試しください。")
+        // Send the array to the PHP server
+        $.ajax({
+            url: 'mail.php', // Your server-side script
+            type: 'POST',
+            data: { items: itemsText }, // Send the array as 'items'
+            success: function(response) {
+                console.log('Server response:', response);
+                console.log('data:', itemsText);
+            },
+            error: function(xhr, status, error) {
+                console.log('Error sending data. Status:', status, 'Error:', error);
             }
         });
-    }
-})
+    });
+});

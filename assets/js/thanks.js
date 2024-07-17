@@ -22,61 +22,18 @@ $(document).ready(function() {
 // });
 
 
-// $(document).ready(function() {
-//     $(window).on('resize load', function() {
-//         $("html, body").scrollTop($(document).height());
-//     });
-
-//     // If new content is dynamically added
-//     setInterval(function() {
-//         $("html, body").scrollTop($(document).height());
-//     }, 2500); // Adjust time interval as needed
-// });
-
-
 $(document).ready(function() {
-    let allowAutoScroll = true; // Flag to enable auto-scroll
-    let timeout, scrollInterval;
-
-    // Function to handle auto-scroll
-    function autoScroll() {
-        if (allowAutoScroll) {
-            $("html, body").scrollTop($(document).height());
-        }
-    }
-
-    // Function to start continuous auto-scroll
-    function startAutoScroll() {
-        allowAutoScroll = true;
-        scrollInterval = setInterval(autoScroll, 1000); // Continuously scroll to the bottom
-    }
-
-    // Function to stop auto-scroll
-    function stopAutoScroll() {
-        allowAutoScroll = false;
-        clearInterval(scrollInterval); // Stop the interval that triggers auto-scroll
-    }
-
-    // Initially, start scrolling on page load
-    startAutoScroll();
-
-    // Stop auto-scrolling after 10 seconds of page load
-    setTimeout(stopAutoScroll, 16000);
-
-    // Event handler for any click on the document
-    $(document).on('click', function() {
-        clearTimeout(timeout); // Clear any previous timeout to reset the timer
-        clearInterval(scrollInterval); // Ensure to clear previous interval as well
-
-        startAutoScroll(); // Restart auto-scrolling
-
-        // Set a new timeout to disable auto-scroll after 6 seconds from the last click
-        timeout = setTimeout(stopAutoScroll, 6000);
+    $(window).on('resize load', function() {
+        $("html, body").scrollTop($(document).height());
     });
 
-    // Optional: Scroll to the bottom on window resize
-    $(window).on('resize', autoScroll);
+    // If new content is dynamically added
+    setInterval(function() {
+        $("html, body").scrollTop($(document).height());
+    }, 2500); // Adjust time interval as needed
 });
+
+
 
 
 
@@ -340,10 +297,6 @@ $(document).ready(function() {
                 $(this).fadeIn();
             }, index * delay);
         });
-        setTimeout(function() {
-            // Redirect to 'thanks.html' after 7 seconds (7000 milliseconds)
-            window.location.href = 'thanks.html';
-        }, 7000); // 7000 milliseconds = 7 seconds
     });
 });
 

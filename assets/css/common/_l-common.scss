@@ -20,6 +20,9 @@
     width: 950px;
     padding-right: 25px;
     padding-left: 25px;
+    @include media-sp {
+        width: 100%;
+    }
 }
 
 .__question {

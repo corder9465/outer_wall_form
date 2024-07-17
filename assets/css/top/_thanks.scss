@@ -1,6 +1,6 @@
-#top {
+#thanks {
     padding-top: 150px;
-    background-image: url(../img/background.png);
+    background-image: url(../img/bg_thanks.jpg);
     background-repeat: no-repeat;
     background-position: top;
     background-size: 100vw 100vh;
@@ -76,7 +76,7 @@
                         &::before {
                             content: "";
                             position: absolute;
-                            top: 35%;
+                            top: 37%;
                             left: -21px;
                             margin-top: -10px;
                             border: 10px solid transparent;
